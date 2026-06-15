@@ -1,7 +1,7 @@
 {
   "id": "settings-float",
   "name": "Settings Float",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "minAppVersion": "1.6.0",
   "description": "Makes the Settings, Theme, and Community Plugins dialogs movable and resizable.",
   "author": "Jason Swartz",
