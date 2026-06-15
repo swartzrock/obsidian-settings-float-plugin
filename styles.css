@@ -1,10 +1,3 @@
-.vertical-tab-content .setmove--settings-title {
-  margin-left: 0;
-  margin-inline-start: 0;
-  padding-left: 0;
-  padding-inline-start: 0;
-}
-
 .setmove--settings-description {
   max-width: 640px;
   margin: 0 0 1.5em;
@@ -78,6 +71,11 @@
       color-mix(in srgb, var(--background-secondary-alt) 70%, var(--interactive-accent-hover) 30%) 0%,
       var(--background-secondary-alt) 72%);
   color: #a9a9a9;
+}
+
+.setmove--control-disabled {
+  pointer-events: none;
+  cursor: default;
 }
 
 .setmove--settings-modal.setmove--is-interacting {

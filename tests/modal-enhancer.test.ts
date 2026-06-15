@@ -2,6 +2,9 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { enhanceSettingsModal } from "../src/modal-enhancer";
 import type { SettingsModalMatch } from "../src/modal-detector";
 import { DEFAULT_SETTINGS, type PersistedGeometry } from "../src/settings";
+import { installObsidianDomHelpers } from "./obsidian-dom";
+
+installObsidianDomHelpers();
 
 const savedGeometry: PersistedGeometry = {
   schemaVersion: 1,
@@ -149,8 +152,8 @@ describe("settings modal enhancer", () => {
     ).toBe(true);
     expect(
       (match.modalEl.querySelector('[data-setmove-role="resize-handle"]') as HTMLElement)
-        .style.display,
-    ).not.toBe("none");
+        .hidden,
+    ).toBe(false);
 
     first.destroy();
   });
@@ -238,9 +241,7 @@ describe("settings modal enhancer", () => {
     );
 
     expect(resizeHandle?.hidden).toBe(true);
-    expect(resizeHandle?.style.display).toBe("none");
-    expect(resizeHandle?.style.pointerEvents).toBe("none");
-    expect(resizeHandle?.style.cursor).toBe("default");
+    expect(resizeHandle?.classList.contains("setmove--control-disabled")).toBe(true);
 
     enhancer.destroy();
   });

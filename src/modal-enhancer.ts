@@ -184,12 +184,10 @@ export class SettingsModalEnhancer {
     this.syncHandleState(
       this.dragHandleEl,
       this.enabled && this.settings.movable,
-      "move",
     );
     this.syncHandleState(
       this.resizeHandleEl,
       this.enabled && this.settings.resizable,
-      "nwse-resize",
     );
     for (const controlsEl of this.presetControlsEls) {
       const isVisible =
@@ -198,7 +196,6 @@ export class SettingsModalEnhancer {
           controlsEl.dataset.setmovePlacement as PresetControlsPlacement,
         );
       controlsEl.hidden = !isVisible;
-      controlsEl.style.display = isVisible ? "" : "none";
     }
 
     if (this.enabled) {
@@ -234,8 +231,10 @@ export class SettingsModalEnhancer {
     this.modalEl.classList.remove(ENHANCED_CLASS, `${ENHANCED_CLASS}--disabled`);
     if (this.contentEl) {
       this.contentEl.classList.remove(CONTENT_CLASS);
-      this.contentEl.style.minHeight = "";
-      this.contentEl.style.overflow = "";
+      this.contentEl.setCssStyles({
+        minHeight: "",
+        overflow: "",
+      });
     }
     this.restoreInlineStyles();
   }
@@ -244,8 +243,10 @@ export class SettingsModalEnhancer {
     this.modalEl.classList.add(ENHANCED_CLASS);
     if (this.contentEl) {
       this.contentEl.classList.add(CONTENT_CLASS);
-      this.contentEl.style.minHeight = "0";
-      this.contentEl.style.overflow = "auto";
+      this.contentEl.setCssStyles({
+        minHeight: "0",
+        overflow: "auto",
+      });
     }
 
     this.modalEl.prepend(this.dragHandleEl);
@@ -271,13 +272,15 @@ export class SettingsModalEnhancer {
 
   private applyRect(rect: ModalRect): void {
     this.currentRect = rect;
-    this.modalEl.style.position = "fixed";
-    this.modalEl.style.left = `${rect.x}px`;
-    this.modalEl.style.top = `${rect.y}px`;
-    this.modalEl.style.width = `${rect.width}px`;
-    this.modalEl.style.height = `${rect.height}px`;
-    this.modalEl.style.maxWidth = "none";
-    this.modalEl.style.maxHeight = "none";
+    this.modalEl.setCssStyles({
+      position: "fixed",
+      left: `${rect.x}px`,
+      top: `${rect.y}px`,
+      width: `${rect.width}px`,
+      height: `${rect.height}px`,
+      maxWidth: "none",
+      maxHeight: "none",
+    });
   }
 
   private resolveInitialRect(): ModalRect {
@@ -425,12 +428,9 @@ export class SettingsModalEnhancer {
   private syncHandleState(
     handleEl: HTMLElement,
     isVisible: boolean,
-    cursor: string,
   ): void {
     handleEl.hidden = !isVisible;
-    handleEl.style.display = isVisible ? "" : "none";
-    handleEl.style.pointerEvents = isVisible ? "" : "none";
-    handleEl.style.cursor = isVisible ? cursor : "default";
+    handleEl.classList.toggle("setmove--control-disabled", !isVisible);
   }
 
   private createSession(
@@ -509,13 +509,15 @@ export class SettingsModalEnhancer {
   }
 
   private restoreInlineStyles(): void {
-    this.modalEl.style.height = this.styleSnapshot.height;
-    this.modalEl.style.left = this.styleSnapshot.left;
-    this.modalEl.style.maxHeight = this.styleSnapshot.maxHeight;
-    this.modalEl.style.maxWidth = this.styleSnapshot.maxWidth;
-    this.modalEl.style.position = this.styleSnapshot.position;
-    this.modalEl.style.top = this.styleSnapshot.top;
-    this.modalEl.style.width = this.styleSnapshot.width;
+    this.modalEl.setCssStyles({
+      height: this.styleSnapshot.height,
+      left: this.styleSnapshot.left,
+      maxHeight: this.styleSnapshot.maxHeight,
+      maxWidth: this.styleSnapshot.maxWidth,
+      position: this.styleSnapshot.position,
+      top: this.styleSnapshot.top,
+      width: this.styleSnapshot.width,
+    });
   }
 }
 

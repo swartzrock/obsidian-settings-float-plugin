@@ -14,10 +14,7 @@ export class SetmoveSettingTab extends PluginSettingTab {
     const plugin = this.pluginRef;
 
     containerEl.empty();
-    containerEl.createEl("h2", {
-      cls: "setmove--settings-title",
-      text: "Settings Float",
-    });
+    new Setting(containerEl).setName("Settings Float").setHeading();
     containerEl.createEl("p", {
       cls: "setmove--settings-description",
       text: "Move and resize Obsidian Settings and catalog dialogs so you can adjust options while keeping your notes and workspace visible.",
