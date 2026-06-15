@@ -105,7 +105,8 @@ export default class SetmovePlugin extends Plugin {
   }
 
   private getOpenEnhancer(): SettingsModalEnhancer | null {
-    return this.activeEnhancers.values().next().value ?? null;
+    const firstEnhancer = this.activeEnhancers.values().next();
+    return firstEnhancer.done ? null : firstEnhancer.value;
   }
 
   private getEnhancerSettings(

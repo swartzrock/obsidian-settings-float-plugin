@@ -2,6 +2,9 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createDragResizeSession } from "../src/drag-resize";
 import { enhanceSettingsModal } from "../src/modal-enhancer";
 import { DEFAULT_SETTINGS } from "../src/settings";
+import { installObsidianDomHelpers } from "./obsidian-dom";
+
+installObsidianDomHelpers();
 
 describe("drag and resize sessions", () => {
   beforeEach(() => {

@@ -63,7 +63,7 @@ export function createDragResizeSession(
     options.handleEl.setPointerCapture?.(event.pointerId);
     options.modalEl.classList.add("setmove--is-interacting");
     options.modalEl.classList.add(`setmove--is-${options.mode === "drag" ? "dragging" : "resizing"}`);
-    options.modalEl.style.userSelect = "none";
+    options.modalEl.setCssStyles({ userSelect: "none" });
     options.onStateChange?.(true);
     event.preventDefault();
   };
@@ -131,7 +131,7 @@ export function createDragResizeSession(
     options.handleEl.releasePointerCapture?.(pointerId);
     options.modalEl.classList.remove("setmove--is-interacting");
     options.modalEl.classList.remove("setmove--is-dragging", "setmove--is-resizing");
-    options.modalEl.style.userSelect = "";
+    options.modalEl.setCssStyles({ userSelect: "" });
     options.onStateChange?.(false);
     active = null;
   };
