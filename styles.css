@@ -46,7 +46,7 @@
       color-mix(in srgb, var(--background-secondary) 82%, transparent) 0%,
       var(--background-secondary) 72%);
   box-shadow: none;
-  color: #b8b8b8;
+  color: var(--text-muted);
   cursor: nwse-resize;
   z-index: 2;
 }
@@ -70,7 +70,7 @@
   background: linear-gradient(135deg,
       color-mix(in srgb, var(--background-secondary-alt) 70%, var(--interactive-accent-hover) 30%) 0%,
       var(--background-secondary-alt) 72%);
-  color: #a9a9a9;
+  color: var(--text-normal);
 }
 
 .setmove--control-disabled {
@@ -126,7 +126,7 @@
   align-items: center;
   padding: 3px;
   border: 1px solid var(--background-modifier-border);
-  border-radius: 8px;
+  border-radius: var(--radius-s);
   background: color-mix(in srgb, var(--background-secondary) 92%, transparent);
   box-shadow: var(--shadow-s);
   opacity: 0;
@@ -168,13 +168,19 @@
   border: 0;
   border-radius: 5px;
   background: transparent;
-  color: #777799;
+  color: var(--text-muted);
   cursor: pointer;
 }
 
 .setmove--preset-control:hover {
   background: var(--background-modifier-hover);
-  color: #777799;
+  color: var(--text-normal);
+}
+
+.setmove--resize-handle:focus-visible,
+.setmove--preset-control:focus-visible {
+  outline: 2px solid var(--interactive-accent);
+  outline-offset: 2px;
 }
 
 .setmove--preset-control svg {

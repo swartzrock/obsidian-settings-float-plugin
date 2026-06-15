@@ -19,3 +19,6 @@ main.js
 # Obsidian local config
 data.json
 
+# Local agent tooling
+.agents/
+skills-lock.json

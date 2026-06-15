@@ -40,7 +40,7 @@ const CATALOG_NON_DRAGGABLE_SELECTOR = [
 ].join(", ");
 const ENHANCEABLE_MODAL_SELECTOR = ".modal.mod-settings, .modal.setmove--settings-modal";
 const SVG_NAMESPACE = "http://www.w3.org/2000/svg";
-const PRESET_ICON_COLOR = "#777799";
+const PRESET_ICON_COLOR = "currentColor";
 type IconDefinition = {
   fillPaths?: string[];
   fillRects?: Array<{ height: number; width: number; x: number; y: number }>;
@@ -89,7 +89,12 @@ interface InlineStyleSnapshot {
 export interface SettingsModalEnhancerOptions {
   settings: Pick<
     SetmoveSettings,
-    "movable" | "resizable" | "rememberGeometry" | "geometry"
+    | "movable"
+    | "resizable"
+    | "rememberGeometry"
+    | "geometry"
+    | "disableOnNarrowWindows"
+    | "narrowWindowThreshold"
   >;
   onGeometryPersist?: (geometry: PersistedGeometry) => void | Promise<void>;
   onResetGeometry?: () => void | Promise<void>;
@@ -111,6 +116,8 @@ export class SettingsModalEnhancer {
   private readonly dragSession: DragResizeSession;
   private readonly resizeSession: DragResizeSession;
   private readonly onWindowResize = (): void => {
+    this.applyEnabledState();
+
     if (!this.enabled || this.currentRect === null) {
       return;
     }
@@ -123,6 +130,7 @@ export class SettingsModalEnhancer {
   private readonly onGeometryPersist?: SettingsModalEnhancerOptions["onGeometryPersist"];
   private readonly onResetGeometry?: SettingsModalEnhancerOptions["onResetGeometry"];
   private enabled = true;
+  private requestedEnabled = true;
   private currentRect: ModalRect | null = null;
 
   constructor(match: SettingsModalMatch, options: SettingsModalEnhancerOptions) {
@@ -179,31 +187,8 @@ export class SettingsModalEnhancer {
   }
 
   toggleEnabled(force?: boolean): boolean {
-    this.enabled = force ?? !this.enabled;
-    this.modalEl.classList.toggle(`${ENHANCED_CLASS}--disabled`, !this.enabled);
-    this.syncHandleState(
-      this.dragHandleEl,
-      this.enabled && this.settings.movable,
-    );
-    this.syncHandleState(
-      this.resizeHandleEl,
-      this.enabled && this.settings.resizable,
-    );
-    for (const controlsEl of this.presetControlsEls) {
-      const isVisible =
-        this.enabled &&
-        VISIBLE_PRESET_CONTROLS_PLACEMENTS.has(
-          controlsEl.dataset.setmovePlacement as PresetControlsPlacement,
-        );
-      controlsEl.hidden = !isVisible;
-    }
-
-    if (this.enabled) {
-      this.currentRect = this.currentRect ?? this.resolveInitialRect();
-      this.applyRect(this.currentRect);
-    } else {
-      this.restoreInlineStyles();
-    }
+    this.requestedEnabled = force ?? !this.requestedEnabled;
+    this.applyEnabledState();
 
     return this.enabled;
   }
@@ -423,6 +408,42 @@ export class SettingsModalEnhancer {
     handle.dataset.setmoveRole = "resize-handle";
     handle.setAttribute("aria-label", "Resize settings window");
     return handle;
+  }
+
+  private applyEnabledState(): void {
+    this.enabled = this.requestedEnabled && this.isWideEnoughForEnhancement();
+    this.modalEl.classList.toggle(`${ENHANCED_CLASS}--disabled`, !this.enabled);
+    this.syncHandleState(
+      this.dragHandleEl,
+      this.enabled && this.settings.movable,
+    );
+    this.syncHandleState(
+      this.resizeHandleEl,
+      this.enabled && this.settings.resizable,
+    );
+
+    for (const controlsEl of this.presetControlsEls) {
+      const isVisible =
+        this.enabled &&
+        VISIBLE_PRESET_CONTROLS_PLACEMENTS.has(
+          controlsEl.dataset.setmovePlacement as PresetControlsPlacement,
+        );
+      controlsEl.hidden = !isVisible;
+    }
+
+    if (this.enabled) {
+      this.currentRect = this.currentRect ?? this.resolveInitialRect();
+      this.applyRect(this.currentRect);
+    } else {
+      this.restoreInlineStyles();
+    }
+  }
+
+  private isWideEnoughForEnhancement(): boolean {
+    return (
+      !this.settings.disableOnNarrowWindows ||
+      this.win.innerWidth >= this.settings.narrowWindowThreshold
+    );
   }
 
   private syncHandleState(
