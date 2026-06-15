@@ -116,7 +116,7 @@ If Settings ends up in an awkward position, use the reset button in the plugin s
 
 ## Compatibility Notes
 
-- Desktop is the intended target; mobile behavior is disabled for 0.1.
+- Desktop is the intended target; mobile behavior is disabled.
 - The plugin relies on Obsidian's current Settings and catalog dialog DOM shapes. Selectors are centralized so they can be updated if Obsidian changes those structures.
 - Custom themes may affect modal spacing, shadows, or scrollbar placement. The plugin uses isolated classes and Obsidian CSS variables where possible.
 - Manual validation in Obsidian is still required before publishing a release.
