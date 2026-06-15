@@ -4,6 +4,7 @@ main.js
 coverage/
 .obsidian/
 .vault-test/
+docs/ideation/
 .DS_Store
 .idea/
 .vscode/
