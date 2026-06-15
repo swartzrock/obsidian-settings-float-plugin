@@ -58,14 +58,11 @@ export default class SetmovePlugin extends Plugin {
       this.stopModalLifecycle?.();
       this.stopModalLifecycle = null;
     });
-
-    console.log(`[${this.manifest.name}] loaded`);
   }
 
   onunload(): void {
     this.stopModalLifecycle?.();
     this.stopModalLifecycle = null;
-    console.log(`[${this.manifest.name}] unloaded`);
   }
 
   async updateSettings(partial: Partial<SetmoveSettings>): Promise<void> {
@@ -87,7 +84,7 @@ export default class SetmovePlugin extends Plugin {
     }
 
     this.applySettingsToOpenEnhancers();
-    new Notice("Reset saved Settings window geometry.");
+    new Notice("Reset saved settings window geometry.");
   }
 
   private async persistGeometry(geometry: PersistedGeometry): Promise<void> {

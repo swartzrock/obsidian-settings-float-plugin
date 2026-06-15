@@ -14,15 +14,15 @@ export class SetmoveSettingTab extends PluginSettingTab {
     const plugin = this.pluginRef;
 
     containerEl.empty();
-    new Setting(containerEl).setName("Settings Float").setHeading();
+    new Setting(containerEl).setName("Window behavior").setHeading();
     containerEl.createEl("p", {
       cls: "setmove--settings-description",
-      text: "Move and resize Obsidian Settings and catalog dialogs so you can adjust options while keeping your notes and workspace visible.",
+      text: "Move and resize supported app dialogs so you can adjust options while keeping your notes and workspace visible.",
     });
 
     new Setting(containerEl)
       .setName("Enable movable dialogs")
-      .setDesc("Allow supported Settings and catalog dialogs to be dragged from safe empty space.")
+      .setDesc("Allow supported app dialogs to be dragged from safe empty space.")
       .addToggle((toggle) =>
         toggle
           .setValue(plugin.settings.movable)
@@ -33,7 +33,7 @@ export class SetmoveSettingTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName("Enable resizable dialogs")
-      .setDesc("Allow supported Settings and catalog dialogs to be resized from the bottom-right handle.")
+      .setDesc("Allow supported app dialogs to be resized from the bottom-right handle.")
       .addToggle((toggle) =>
         toggle
           .setValue(plugin.settings.resizable)
@@ -44,7 +44,7 @@ export class SetmoveSettingTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName("Remember window geometry")
-      .setDesc("Persist the last valid Settings position and size for this vault.")
+      .setDesc("Persist the last valid settings position and size for this vault.")
       .addToggle((toggle) =>
         toggle
           .setValue(plugin.settings.rememberGeometry)
@@ -54,8 +54,8 @@ export class SetmoveSettingTab extends PluginSettingTab {
       );
 
     new Setting(containerEl)
-      .setName("Disable on narrow windows")
-      .setDesc("Keep the plugin conservative on cramped desktop windows.")
+      .setName("Disable in narrow layouts")
+      .setDesc("Keep the plugin conservative in cramped desktop layouts.")
       .addToggle((toggle) =>
         toggle
           .setValue(plugin.settings.disableOnNarrowWindows)
@@ -77,7 +77,7 @@ export class SetmoveSettingTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName("Reset saved geometry")
-      .setDesc("Forget the saved position and size so Settings reopens with the default layout.")
+      .setDesc("Forget the saved position and size so settings reopens with the default layout.")
       .addButton((button) =>
         button.setButtonText("Reset").onClick(async () => {
           await plugin.resetSavedGeometryCommand();

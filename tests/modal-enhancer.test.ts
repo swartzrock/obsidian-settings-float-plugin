@@ -217,8 +217,8 @@ describe("settings modal enhancer", () => {
     expect(rightIcon?.querySelector("rect")?.getAttribute("x")).toBe("15");
     expect(leftIcon?.querySelectorAll("path")).toHaveLength(2);
     expect(rightIcon?.querySelectorAll("path")).toHaveLength(2);
-    expect(resetIcon?.querySelector("path")?.getAttribute("fill")).toBe("#777799");
-    expect(leftIcon?.querySelector("path")?.getAttribute("stroke")).toBe("#777799");
+    expect(resetIcon?.querySelector("path")?.getAttribute("fill")).toBe("currentColor");
+    expect(leftIcon?.querySelector("path")?.getAttribute("stroke")).toBe("currentColor");
     expect(resetIcon?.querySelector("path")?.getAttribute("d")).toContain(
       "H4.2V4.9z",
     );
@@ -262,6 +262,41 @@ describe("settings modal enhancer", () => {
     expect(match.modalEl.querySelector('[data-setmove-role="resize-handle"]')).not.toBeNull();
     expect(match.modalEl.querySelectorAll('[data-setmove-role="preset-controls"]')).toHaveLength(3);
     expect(match.modalEl.querySelector(".setmove--settings-content")).toBeNull();
+
+    enhancer.destroy();
+  });
+
+  it("disables enhancement while the host window is narrower than the configured threshold", () => {
+    Object.defineProperty(window, "innerWidth", {
+      configurable: true,
+      value: 640,
+    });
+    const match = createSettingsMatch();
+    const enhancer = enhanceSettingsModal(match, {
+      settings: {
+        ...DEFAULT_SETTINGS,
+        disableOnNarrowWindows: true,
+        narrowWindowThreshold: 720,
+      },
+    });
+
+    const resizeHandle = match.modalEl.querySelector<HTMLElement>(
+      '[data-setmove-role="resize-handle"]',
+    );
+
+    expect(match.modalEl.classList.contains("setmove--settings-modal--disabled")).toBe(true);
+    expect(match.modalEl.style.position).toBe("");
+    expect(resizeHandle?.hidden).toBe(true);
+
+    Object.defineProperty(window, "innerWidth", {
+      configurable: true,
+      value: 900,
+    });
+    window.dispatchEvent(new Event("resize"));
+
+    expect(match.modalEl.classList.contains("setmove--settings-modal--disabled")).toBe(false);
+    expect(match.modalEl.style.position).toBe("fixed");
+    expect(resizeHandle?.hidden).toBe(false);
 
     enhancer.destroy();
   });
