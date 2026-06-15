@@ -3,11 +3,20 @@ name: Publish Release
 on:
   push:
     tags:
-      - "v*"
+      - "0*"
+      - "1*"
+      - "2*"
+      - "3*"
+      - "4*"
+      - "5*"
+      - "6*"
+      - "7*"
+      - "8*"
+      - "9*"
   workflow_dispatch:
     inputs:
       tag:
-        description: "Release tag to create, for example v0.1.0. Defaults to manifest version."
+        description: "Release tag to create, for example 0.1.0. Defaults to manifest version."
         required: false
         type: string
 
@@ -57,8 +66,18 @@ jobs:
           if [ "${GITHUB_EVENT_NAME}" = "workflow_dispatch" ]; then
             TAG_NAME="${INPUT_TAG}"
             if [ -z "${TAG_NAME}" ]; then
-              TAG_NAME="v${VERSION}"
+              TAG_NAME="${VERSION}"
             fi
+          fi
+
+          if [[ ! "${TAG_NAME}" =~ ^[0-9] ]]; then
+            echo "::error::Release tag must start with a digit and match manifest.json version (${VERSION})."
+            exit 1
+          fi
+
+          if [ "${TAG_NAME}" != "${VERSION}" ]; then
+            echo "::error::Release tag (${TAG_NAME}) must match manifest.json version (${VERSION})."
+            exit 1
           fi
 
           echo "version=${VERSION}" >> "${GITHUB_OUTPUT}"
