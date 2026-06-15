@@ -15,8 +15,8 @@ Settings Float is an Obsidian desktop plugin that makes the core Settings modal 
 
 ## Demo
 
-<video controls width="100%" src="https://github.com/user-attachments/assets/95e5138d-2156-4bb6-a6ac-2f0efdb8c209">
-  <a href="https://github.com/user-attachments/assets/95e5138d-2156-4bb6-a6ac-2f0efdb8c209">Watch the demo video</a>
+<video controls width="100%" src="https://github.com/user-attachments/assets/844d1333-963a-4454-9825-0eae6d5b51c3">
+  <a href="https://github.com/user-attachments/assets/844d1333-963a-4454-9825-0eae6d5b51c3">Watch the demo video</a>
 </video>
 
 ## Table of Contents
