@@ -1,0 +1,45 @@
+{
+  "name": "settings-float",
+  "version": "0.1.0",
+  "description": "Obsidian plugin that makes Settings and catalog dialogs movable and resizable.",
+  "license": "MIT",
+  "author": "Jason Swartz",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swartzrock/settings-float.git"
+  },
+  "bugs": {
+    "url": "https://github.com/swartzrock/settings-float/issues"
+  },
+  "homepage": "https://github.com/swartzrock/settings-float#readme",
+  "keywords": [
+    "obsidian",
+    "obsidian-plugin",
+    "settings",
+    "modal",
+    "appearance"
+  ],
+  "packageManager": "bun@1.3.14",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "node esbuild.config.mjs production",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --environment jsdom"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.29.0",
+    "@types/jsdom": "^21.1.7",
+    "@types/node": "^24.0.4",
+    "eslint": "^9.29.0",
+    "eslint-plugin-n": "^17.21.0",
+    "globals": "^16.2.0",
+    "jiti": "^2.4.2",
+    "jsdom": "^26.1.0",
+    "obsidian": "^1.8.10",
+    "esbuild": "^0.25.5",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.34.1",
+    "vitest": "^3.2.4"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "id": "settings-float",
+  "name": "Settings Float",
+  "version": "0.1.0",
+  "minAppVersion": "1.6.0",
+  "description": "Makes Obsidian Settings and catalog dialogs movable and resizable.",
+  "author": "Jason Swartz",
+  "authorUrl": "https://github.com/swartzrock",
+  "isDesktopOnly": true
+}
