@@ -1,10 +1,10 @@
 {
-  "id": "settings-float",
-  "name": "Settings Float",
-  "version": "0.2.0",
-  "minAppVersion": "1.6.0",
-  "description": "Makes the Settings, Theme, and Community Plugins dialogs movable and resizable.",
-  "author": "Jason Swartz",
-  "authorUrl": "https://github.com/swartzrock",
-  "isDesktopOnly": true
+	"id": "settings-float",
+	"name": "Settings Float",
+	"version": "0.2.1",
+	"minAppVersion": "1.6.0",
+	"description": "Makes the Settings, Theme, and Community Plugins dialogs movable and resizable.",
+	"author": "Jason Swartz",
+	"authorUrl": "https://github.com/swartzrock",
+	"isDesktopOnly": true
 }
