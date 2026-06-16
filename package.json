@@ -1,6 +1,6 @@
 {
   "name": "settings-float",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Obsidian plugin that makes Settings and catalog dialogs movable and resizable.",
   "license": "MIT",
   "author": "Jason Swartz",
