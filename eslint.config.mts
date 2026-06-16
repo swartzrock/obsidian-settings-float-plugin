@@ -30,7 +30,7 @@ export default defineConfig([
   },
   ...obsidianmd.configs.recommended,
   {
-    files: ["*.config.mjs"],
+    files: ["*.config.mjs", "version-bump.mjs"],
     rules: typeAwareObsidianRules,
   },
   {
