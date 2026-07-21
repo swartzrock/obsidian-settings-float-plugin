@@ -112,7 +112,8 @@ If Settings ends up in an awkward position, use the reset button in the plugin s
 1. Install dependencies with `bun install`.
 2. Run `bun run dev` for watch mode or `bun run build` for a production bundle.
 3. Use `bun run typecheck`, `bun run lint`, and `bun run test` before packaging.
-4. Release packaging expects `manifest.json`, `main.js`, and `styles.css`; the publish workflow also creates `settings-float-<version>.zip`.
+4. Run `bun run changeset` for releasable changes and commit the generated changeset file.
+5. Merging the generated release PR publishes `manifest.json`, `main.js`, `styles.css`, and `settings-float-<version>.zip` to a GitHub release.
 
 ## Compatibility Notes
 
