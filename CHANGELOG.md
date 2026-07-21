@@ -1,13 +1,17 @@
 # Changelog
 
-Changes to the Settings Float plugin for Obsidian.
+## 0.2.2
 
+### Patch Changes
+
+- 98aa8cf: Add Changesets-managed version PRs and automatic GitHub releases.
+- 73a2264: Fixed the color-picker selection bug
+
+Changes to the Settings Float plugin for Obsidian.
 
 # [0.2.0](https://github.com/swartzrock/obsidian-settings-float-plugin/releases/tag/0.2.0)
 
-
 Maintenance release for Obsidian community plugin submission feedback and release workflow cleanup.
-
 
 ## Fixed
 
@@ -36,13 +40,9 @@ Maintenance release for Obsidian community plugin submission feedback and releas
 - `main.js`
 - `styles.css`
 
-
-
-
 # [0.1.0](https://github.com/swartzrock/obsidian-settings-float-plugin/releases/tag/0.1.0)
 
 Initial desktop release for moving and resizing the core Obsidian Settings modal.
-
 
 ## Added
 
