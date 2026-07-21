@@ -245,6 +245,50 @@ describe("modal enhancer interactions", () => {
     enhancer.destroy();
   });
 
+  it("does not drag from a custom color picker", () => {
+    const match = createSettingsFixture({
+      extraContent: `
+        <div class="pcr-app" role="window" aria-label="Color picker dialog">
+          <div class="pcr-selection">
+            <div class="pcr-color-palette">
+              <div class="pcr-palette" role="listbox" aria-label="Color selection area"></div>
+            </div>
+          </div>
+        </div>
+      `,
+    });
+    const onGeometryPersist = vi.fn();
+    const enhancer = enhanceSettingsModal(match, {
+      settings: {
+        ...DEFAULT_SETTINGS,
+      },
+      onGeometryPersist,
+    });
+
+    stubPointerCapture(match.modalEl);
+
+    const palette = match.modalEl.querySelector<HTMLElement>(".pcr-palette");
+    if (!palette) {
+      throw new Error("Missing color picker palette");
+    }
+
+    palette.dispatchEvent(
+      pointerEvent("pointerdown", { pointerId: 23, clientX: 20, clientY: 20 }),
+    );
+    palette.dispatchEvent(
+      pointerEvent("pointermove", { pointerId: 23, clientX: 120, clientY: 100 }),
+    );
+    palette.dispatchEvent(
+      pointerEvent("pointerup", { pointerId: 23, clientX: 120, clientY: 100 }),
+    );
+
+    expect(match.modalEl.style.left).toBe("270px");
+    expect(match.modalEl.style.top).toBe("130px");
+    expect(onGeometryPersist).not.toHaveBeenCalled();
+
+    enhancer.destroy();
+  });
+
   it("persists geometry after resize and clamps it into the host bounds", () => {
     const match = createSettingsFixture();
     const onGeometryPersist = vi.fn();

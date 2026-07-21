@@ -28,6 +28,7 @@ const NON_DRAGGABLE_SELECTOR = [
   ".clickable-icon",
   ".slider",
   ".dropdown",
+  ".pcr-app",
   "[data-setmove-role='resize-handle']",
   "[data-setmove-role='preset-control']",
 ].join(", ");
