@@ -1,5 +1,5 @@
 ---
-"settings-float": minor
+"settings-float": patch
 ---
 
 Fixed the color-picker selection bug
