@@ -47,5 +47,9 @@ jobs:
     name: Publish release
     needs: changesets
     if: needs.changesets.outputs.has-changesets == 'false'
+    permissions:
+      attestations: write
+      contents: write
+      id-token: write
     uses: ./.github/workflows/publish.yml
     secrets: inherit
