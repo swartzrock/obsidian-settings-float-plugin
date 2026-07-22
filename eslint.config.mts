@@ -54,7 +54,6 @@ export default defineConfig([
   {
     files: ["src/**/*.ts", "tests/**/*.ts"],
     languageOptions: {
-      parser: tsparser,
       parserOptions: { project: "./tsconfig.json" },
     },
     rules: {
